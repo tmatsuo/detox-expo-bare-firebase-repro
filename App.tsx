@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { initializeApp } from 'firebase/app';
 import { initializeFirestore } from 'firebase/firestore';
+import { Ripples } from './src/Ripples';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -32,9 +33,25 @@ export default function App() {
     return () => unsubscribe();
   }, []);
   return (
+
     <View style={styles.container} testID='homeView'>
       <Text>A simple app for detox repro: </Text>
       <Text testID="Message">{message}</Text>
+      <Ripples
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: 1,
+          elevation: 1,
+          alignSelf: 'center',
+        }}
+        width={120}
+        height={120}
+        num={2}
+        cycle={5000}
+        maxRadius={60}
+      />
       <StatusBar style="auto" />
     </View>
   );
