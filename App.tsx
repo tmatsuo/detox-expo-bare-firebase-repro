@@ -22,16 +22,21 @@ const firestore = initializeFirestore(firebase_app, { experimentalForceLongPolli
 export default function App() {
   const [message, setMessage] = useState<string>("default message");
 
+  /* useEffect(() => {
+   *   const messageRef = doc(firestore, 'Message', 'hello');
+   *   const unsubscribe = onSnapshot(messageRef, (snapshot) => {
+   *     const m = snapshot.get('message');
+   *     if (m) {
+   *       setMessage(m);
+   *     }
+   *   });
+   *   return () => unsubscribe();
+   * }, []); */
   useEffect(() => {
-    const messageRef = doc(firestore, 'Message', 'hello');
-    const unsubscribe = onSnapshot(messageRef, (snapshot) => {
-      const m = snapshot.get('message');
-      if (m) {
-        setMessage(m);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    setTimeout(() => {
+      setMessage('Hello Detox');
+    }, 5000);
+  })
   return (
 
     <View style={styles.container} testID='homeView'>
